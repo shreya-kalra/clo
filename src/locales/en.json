@@ -1,0 +1,21 @@
+{
+  "app": {
+    "title": "CONNECT"
+  },
+  "common": {
+    "free": "FREE",
+    "view-only": "View Only",
+    "paid": "Paid"
+  },
+  "search": {
+    "placeholder": "Find the items you're looking for"
+  },
+  "filters": {
+    "title": "Pricing Option",
+    "reset": "Reset"
+  },
+  "content": {
+    "loading": "Loading items...",
+    "empty": "No content found"
+  }
+}
