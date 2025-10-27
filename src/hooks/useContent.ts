@@ -68,7 +68,7 @@ const filterItems = (
   }
 
   // Pricing filters
-  const { paid, free, viewOnly } = filters;
+  const { paid, free, viewOnly, priceRange } = filters;
   if (paid || free || viewOnly) {
     filtered = filtered.filter(item => {
       return (
@@ -76,6 +76,15 @@ const filterItems = (
         (free && item.status === PricingStatus.FREE) ||
         (viewOnly && item.status === PricingStatus.VIEW_ONLY)
       );
+    });
+  }
+
+  // Price range filter (only when paid is selected)
+  // This allows users to filter paid items within a specific price range (e.g., $100-$500)
+  // The slider activates only when the "Paid" filter is checked
+  if (paid && priceRange) {
+    filtered = filtered.filter(item => {
+      return item.price >= priceRange.min && item.price <= priceRange.max;
     });
   }
 

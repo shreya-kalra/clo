@@ -20,5 +20,3 @@ export const SearchIcon: React.FC<IconProps> = ({ className = '' }) => (
     />
   </svg>
 );
-
-export default SearchIcon;

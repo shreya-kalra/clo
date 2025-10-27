@@ -1,6 +1,16 @@
 # Content List Application
 
-![Preview](public/preview.png)
+## Desktop Preview
+
+![Desktop Preview](public/desktop-preview.png)
+
+## Tablet Preview
+
+![Tablet Preview](public/tablet-preview.png)
+
+## Mobile Preview
+
+![Mobile Preview](public/mobile-preview.png)
 
 A modern React application for browsing and filtering content items with search functionality. Built with React, TypeScript, Redux Toolkit, and Vite.
 
@@ -21,7 +31,9 @@ A modern React application for browsing and filtering content items with search 
 
 - **Content Browsing**: View a list of content items with details (title, creator, price, image)
 - **Search Functionality**: Real-time search across content items
-- **Filter by Pricing**: Filter content by pricing status (Free, Paid, View Only)
+- **Advanced Filtering**: Filter content by pricing status (Free, Paid, View Only)
+- **Price Range Slider**: Dual-handle range slider for filtering paid items within a specific price range (0-999)
+- **Sort Options**: Sort content by Item Name, Higher Price, or Lower Price
 - **Loading States**: Proper loading indicators during API calls
 - **Error Handling**: Comprehensive error handling with retry functionality
 - **Responsive Design**: Modern, responsive UI built with SCSS
@@ -37,6 +49,7 @@ A modern React application for browsing and filtering content items with search 
 - **Redux Toolkit 2.9** - State management
 - **Axios 1.12** - HTTP client
 - **React Redux 9.1** - Redux React bindings
+- **react-range-slider-input 1.4** - Dual-handle range slider
 - **i18next 25.6** - Internationalization
 - **Vite 5.2** - Build tool
 
@@ -57,7 +70,8 @@ clo/
 ├── src/
 │   ├── components/     # React components
 │   │   ├── ContentsList/
-│   │   ├── FilterSection/
+│   │   ├── FilterSection/  # Filter checkboxes + price range slider
+│   │   ├── SortSection/    # Sort dropdown
 │   │   ├── Header/
 │   │   ├── ItemCard/
 │   │   └── SearchBar/
@@ -131,6 +145,33 @@ clo/
 | `yarn lint:fix`      | Lint and fix code         |
 | `yarn format`        | Format code with Prettier |
 | `yarn format:check`  | Check code formatting     |
+
+## 🔍 Sorting & Filtering
+
+### Sorting Options
+
+The application provides three sorting options:
+
+- **Item Name (Default)**: Alphabetical sort by title
+- **Higher Price**: Paid items (price 100→0), then Free, then View Only
+- **Lower Price**: View Only first, then Free, then Paid items (price 0→100)
+
+### Filtering
+
+Content can be filtered by pricing status:
+
+- **Free**: Items available at no cost
+- **Paid**: Items with a price
+- **View Only**: Items restricted to viewing only
+
+### Price Range Slider
+
+When the "Paid" filter is enabled, a dual-handle range slider appears allowing you to filter paid items within a specific price range:
+
+- **Range**: $0 - $999
+- **Dual-handle control**: Adjust both minimum and maximum values
+- **Real-time filtering**: Content updates as you adjust the range
+- **Visual feedback**: Price values displayed with the slider
 
 ## 🔌 API Integration
 
@@ -244,6 +285,34 @@ The application is prepared for internationalization using `i18next`:
 - Translation files in `src/locales/`
 - Support for multiple languages
 - Ready to add new translations
+
+## 🚀 Future Enhancements
+
+### Server-Side Operations
+
+The following features are currently implemented client-side but should be moved to the server for better performance and scalability:
+
+- **Server-Side Search**: Move search functionality from client-side filtering to API endpoints
+- **Server-Side Filtering**: Implement filtering logic on the backend for better performance with large datasets
+- **Server-Side Sorting**: Move sorting operations to the API to reduce client-side processing
+- **Price Range Slider API**: Add backend support for price range filtering to handle large datasets efficiently
+
+### Pagination
+
+Implement pagination to handle large content datasets:
+
+- Add pagination controls (Previous, Next, page numbers)
+- Implement page size selection (10, 25, 50, 100 items per page)
+- Display total count of items and current page range
+- Support infinite scroll as an alternative to traditional pagination
+
+### Additional Features
+
+- **Content Detail View**: Expandable or dedicated page for detailed item information
+- **Favorites/Bookmarks**: Allow users to save favorite items
+- **Export Functionality**: Export filtered/sorted content to CSV or JSON
+- **Advanced Filters**: Additional filter options (date range, creator, category)
+- **User Preferences**: Save user preferences for filters, sort order, and display settings
 
 ## 🤝 Contributing
 

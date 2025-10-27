@@ -2,6 +2,15 @@
 @use '../../styles/variables' as *;
 @use '../../styles/mixins' as *;
 
+.range-slider__range {
+  background: $primary-color !important;
+}
+
+.range-slider__thumb {
+  background: $primary-color !important;
+  border: $spacing-0-125 solid $white-color !important;
+}
+
 // Filter section component styles
 .filter-section {
   background-color: $background-secondary;
@@ -67,33 +76,73 @@
     @include smooth-transition();
   }
 
+  &__price-range {
+    display: flex;
+    flex-direction: column;
+    gap: $space-1;
+    width: 100%;
+  }
+  &__range-slider {
+    margin: $space-0-5;
+    width: 100%;
+  }
+
+  &__price-values {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__price-wrapper {
+    align-items: center;
+    display: flex;
+    gap: $space-0-5;
+  }
+
+  &__price-icon {
+    color: $white-color;
+    height: 1rem;
+    width: 1rem;
+  }
+
+  &__price-value {
+    color: $white-color;
+    font-size: $text-sm;
+    font-weight: 500;
+    min-width: 60px;
+  }
+
   // Responsive styles
   @include media($mobile-lg) {
-    padding: $space-1;
     gap: $space-1;
+    padding: $space-1;
 
-    // .filter-section__checkbox {
-    //   min-height: auto;
-    // }
+    .filter-section__wrapper {
+      align-items: center;
+      display: flex;
+      gap: $space-0-75;
+    }
 
-    .filter-section__reset {
+    .filter-section____reset {
       font-size: $text-xs;
       padding: $space-0-5;
       min-height: 2.5rem;
     }
+    .filter-section____price-values {
+      width: 50vw;
+    }
   }
 
   @include media($tablet) {
-    flex-direction: row;
     align-items: center;
+    flex-direction: row;
     justify-content: space-between;
     padding: 1rem;
 
     .filter-section__options {
-      flex-direction: row;
-      align-items: center;
       gap: $space-1;
       flex: 1;
+      justify-content: start;
     }
 
     .filter-section__checkboxes {
@@ -102,22 +151,30 @@
     }
 
     .filter-section__checkbox {
-      min-height: auto;
       min-height: $text-xl;
     }
 
     .filter-section__reset {
-      width: auto;
       margin-top: 0;
-      padding: $space-0-5 $space-1;
       min-height: auto;
+      padding: $space-0-5 $space-1;
+      width: auto;
+    }
+    .filter-section__price-range {
+      width: 60%;
     }
   }
 
   @include media($desktop) {
-    .filter-section__checkboxes {
+    .filter-section__options {
+      flex-direction: row;
+    }
+    .filter-section__wrapper {
       width: 40%;
+    }
+    .filter-section__checkboxes {
       height: $text-xl;
+      width: 70%;
     }
   }
 }

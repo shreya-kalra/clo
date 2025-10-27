@@ -1,3 +1,4 @@
+import { MAX_PRICE, MIN_PRICE } from '../../constants';
 import contentReducer, {
   ContentState,
   Item,
@@ -20,7 +21,12 @@ describe('contentSlice', () => {
     loading: false,
     error: null,
     searchTerm: '',
-    filters: { paid: false, free: false, viewOnly: false },
+    filters: {
+      paid: false,
+      free: false,
+      viewOnly: false,
+      priceRange: { min: MIN_PRICE, max: MAX_PRICE },
+    },
     sortOption: SortOption.ITEM_NAME,
     hasFetched: false,
   };
@@ -49,7 +55,12 @@ describe('contentSlice', () => {
 
   describe('setFilters', () => {
     test('should update filters', () => {
-      const newFilters = { paid: true, free: false, viewOnly: false };
+      const newFilters = {
+        paid: true,
+        free: false,
+        viewOnly: false,
+        priceRange: { min: MIN_PRICE, max: MAX_PRICE },
+      };
       const action = setFilters(newFilters);
       const state = contentReducer(initialState, action);
 
@@ -57,7 +68,12 @@ describe('contentSlice', () => {
     });
 
     test('should update multiple filters', () => {
-      const newFilters = { paid: true, free: true, viewOnly: true };
+      const newFilters = {
+        paid: true,
+        free: true,
+        viewOnly: true,
+        priceRange: { min: MIN_PRICE, max: MAX_PRICE },
+      };
       const action = setFilters(newFilters);
       const state = contentReducer(initialState, action);
 
@@ -91,7 +107,12 @@ describe('contentSlice', () => {
       const stateWithData: ContentState = {
         ...initialState,
         searchTerm: 'test',
-        filters: { paid: true, free: true, viewOnly: true },
+        filters: {
+          paid: true,
+          free: true,
+          viewOnly: true,
+          priceRange: { min: 10, max: 500 },
+        },
       };
 
       const action = clearFilters();
@@ -102,6 +123,7 @@ describe('contentSlice', () => {
         paid: false,
         free: false,
         viewOnly: false,
+        priceRange: { min: MIN_PRICE, max: MAX_PRICE },
       });
     });
   });

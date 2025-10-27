@@ -1,2 +1,2 @@
-export { SearchIcon } from './SearchIcon';
 export { CrossIcon } from './CrossIcon';
+export { SearchIcon } from './SearchIcon';

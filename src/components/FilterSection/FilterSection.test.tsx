@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { MAX_PRICE, MIN_PRICE } from '../../constants';
 import FilterSection from './FilterSection';
 
 // Mock the translate function
@@ -11,6 +12,13 @@ jest.mock('../../locales', () => ({
 describe('FilterSection', () => {
   const mockOnFilterChange = jest.fn();
   const mockOnReset = jest.fn();
+
+  const defaultFilters = {
+    paid: false,
+    free: false,
+    viewOnly: false,
+    priceRange: { min: MIN_PRICE, max: MAX_PRICE },
+  };
 
   beforeEach(() => {
     mockOnFilterChange.mockClear();
@@ -60,7 +68,7 @@ describe('FilterSection', () => {
       <FilterSection
         onFilterChange={mockOnFilterChange}
         onReset={mockOnReset}
-        initialFilters={{ paid: true, free: false, viewOnly: false }}
+        initialFilters={{ ...defaultFilters, paid: true }}
       />
     );
 
@@ -80,9 +88,8 @@ describe('FilterSection', () => {
     await userEvent.click(paidCheckbox);
 
     expect(mockOnFilterChange).toHaveBeenCalledWith({
+      ...defaultFilters,
       paid: true,
-      free: false,
-      viewOnly: false,
     });
   });
 
@@ -91,7 +98,7 @@ describe('FilterSection', () => {
       <FilterSection
         onFilterChange={mockOnFilterChange}
         onReset={mockOnReset}
-        initialFilters={{ paid: true, free: false, viewOnly: false }}
+        initialFilters={{ ...defaultFilters, paid: true }}
       />
     );
 
@@ -100,11 +107,7 @@ describe('FilterSection', () => {
 
     await userEvent.click(paidCheckbox);
 
-    expect(mockOnFilterChange).toHaveBeenCalledWith({
-      paid: false,
-      free: false,
-      viewOnly: false,
-    });
+    expect(mockOnFilterChange).toHaveBeenCalledWith(defaultFilters);
   });
 
   test('multiple filters can be active simultaneously', async () => {
@@ -114,7 +117,7 @@ describe('FilterSection', () => {
       <FilterSection
         onFilterChange={mockOnFilterChange}
         onReset={mockOnReset}
-        initialFilters={{ paid: false, free: false, viewOnly: false }}
+        initialFilters={defaultFilters}
       />
     );
 
@@ -128,9 +131,8 @@ describe('FilterSection', () => {
     // This simulates the parent component updating initialFilters after first click
     await waitFor(() => {
       expect(mockOnFilterChange).toHaveBeenCalledWith({
+        ...defaultFilters,
         paid: true,
-        free: false,
-        viewOnly: false,
       });
     });
 
@@ -142,16 +144,15 @@ describe('FilterSection', () => {
 
     // First call: paid was clicked (paid: true, free: false)
     expect(mockOnFilterChange).toHaveBeenNthCalledWith(1, {
+      ...defaultFilters,
       paid: true,
-      free: false,
-      viewOnly: false,
     });
 
     // Second call: free was clicked while paid was active (paid: true, free: true)
     expect(mockOnFilterChange).toHaveBeenNthCalledWith(2, {
+      ...defaultFilters,
       paid: true,
       free: true,
-      viewOnly: false,
     });
   });
 
@@ -160,7 +161,12 @@ describe('FilterSection', () => {
       <FilterSection
         onFilterChange={mockOnFilterChange}
         onReset={mockOnReset}
-        initialFilters={{ paid: true, free: true, viewOnly: true }}
+        initialFilters={{
+          ...defaultFilters,
+          paid: true,
+          free: true,
+          viewOnly: true,
+        }}
       />
     );
 
@@ -175,7 +181,12 @@ describe('FilterSection', () => {
       <FilterSection
         onFilterChange={mockOnFilterChange}
         onReset={mockOnReset}
-        initialFilters={{ paid: true, free: true, viewOnly: true }}
+        initialFilters={{
+          ...defaultFilters,
+          paid: true,
+          free: true,
+          viewOnly: true,
+        }}
       />
     );
 
@@ -195,7 +206,7 @@ describe('FilterSection', () => {
       <FilterSection
         onFilterChange={mockOnFilterChange}
         onReset={mockOnReset}
-        initialFilters={{ paid: false, free: false, viewOnly: false }}
+        initialFilters={defaultFilters}
       />
     );
 
@@ -205,10 +216,86 @@ describe('FilterSection', () => {
       <FilterSection
         onFilterChange={mockOnFilterChange}
         onReset={mockOnReset}
-        initialFilters={{ paid: true, free: false, viewOnly: false }}
+        initialFilters={{ ...defaultFilters, paid: true }}
       />
     );
 
     expect(screen.getByLabelText('common.paid')).toBeChecked();
+  });
+
+  test('renders price range slider when paid is checked', () => {
+    render(
+      <FilterSection
+        onFilterChange={mockOnFilterChange}
+        onReset={mockOnReset}
+        initialFilters={{ ...defaultFilters, paid: true }}
+      />
+    );
+
+    // Check that price values are displayed
+    expect(screen.getByText(`$${MIN_PRICE}`)).toBeInTheDocument();
+    expect(screen.getByText(`$${MAX_PRICE}`)).toBeInTheDocument();
+  });
+
+  test('does not render price range slider when paid is not checked', () => {
+    render(
+      <FilterSection
+        onFilterChange={mockOnFilterChange}
+        onReset={mockOnReset}
+        initialFilters={defaultFilters}
+      />
+    );
+
+    // Price range should not be visible
+    expect(screen.queryByText(`$${MIN_PRICE}`)).not.toBeInTheDocument();
+    expect(screen.queryByText(`$${MAX_PRICE}`)).not.toBeInTheDocument();
+  });
+
+  test('price range slider shows custom initial values', () => {
+    const customMin = 100;
+    const customMax = 500;
+
+    render(
+      <FilterSection
+        onFilterChange={mockOnFilterChange}
+        onReset={mockOnReset}
+        initialFilters={{
+          ...defaultFilters,
+          paid: true,
+          priceRange: { min: customMin, max: customMax },
+        }}
+      />
+    );
+
+    expect(screen.getByText(`$${customMin}`)).toBeInTheDocument();
+    expect(screen.getByText(`$${customMax}`)).toBeInTheDocument();
+  });
+
+  test('price range resets to default values when reset is clicked', async () => {
+    const customMin = 100;
+    const customMax = 500;
+
+    render(
+      <FilterSection
+        onFilterChange={mockOnFilterChange}
+        onReset={mockOnReset}
+        initialFilters={{
+          ...defaultFilters,
+          paid: true,
+          priceRange: { min: customMin, max: customMax },
+        }}
+      />
+    );
+
+    // Verify custom values are shown
+    expect(screen.getByText(`$${customMin}`)).toBeInTheDocument();
+    expect(screen.getByText(`$${customMax}`)).toBeInTheDocument();
+
+    // Click reset
+    const resetButton = screen.getByText('filters.reset');
+    await userEvent.click(resetButton);
+
+    // After reset, filters should be cleared (paid becomes false, so slider disappears)
+    expect(screen.getByLabelText('common.paid')).not.toBeChecked();
   });
 });

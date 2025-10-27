@@ -1,5 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+import { MAX_PRICE, MIN_PRICE } from '../../constants';
 import { API, ApiMethod } from '../../constants/api.constants';
 import { makeApiCall } from '../../services/api.service';
 
@@ -46,6 +47,10 @@ export interface Filters {
   paid: boolean;
   free: boolean;
   viewOnly: boolean;
+  priceRange: {
+    min: number;
+    max: number;
+  };
 }
 
 /**
@@ -171,6 +176,10 @@ const initialState: ContentState = {
     paid: false,
     free: false,
     viewOnly: false,
+    priceRange: {
+      min: MIN_PRICE,
+      max: MAX_PRICE,
+    },
   },
   sortOption: SortOption.ITEM_NAME,
   hasFetched: false, // Track if data has been fetched
@@ -217,6 +226,10 @@ const contentSlice = createSlice({
         paid: false,
         free: false,
         viewOnly: false,
+        priceRange: {
+          min: MIN_PRICE,
+          max: MAX_PRICE,
+        },
       };
     },
     /**

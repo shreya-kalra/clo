@@ -20,5 +20,3 @@ export const CrossIcon: React.FC<IconProps> = ({ className = '' }) => (
     />
   </svg>
 );
-
-export default CrossIcon;
