@@ -157,11 +157,6 @@ a {
   }
 }
 
-// Focus improvements
-*:focus-visible {
-  @include focus-visible;
-}
-
 // Mobile-specific improvements
 @include media($tablet) {
   // Prevent zoom on input focus on iOS

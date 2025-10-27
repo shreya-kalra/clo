@@ -49,6 +49,15 @@ export interface Filters {
 }
 
 /**
+ * Enum representing the different sort options.
+ */
+export enum SortOption {
+  ITEM_NAME = 'ITEM_NAME',
+  HIGHER_PRICE = 'HIGHER_PRICE',
+  LOWER_PRICE = 'LOWER_PRICE',
+}
+
+/**
  * Interface for the content slice state management.
  * Tracks items, filtered results, loading/error states, and user filters.
  */
@@ -65,6 +74,8 @@ export interface ContentState {
   searchTerm: string;
   /** Current filter settings */
   filters: Filters;
+  /** Current sort option */
+  sortOption: SortOption;
   /** Flag to track if initial data fetch has occurred */
   hasFetched: boolean;
 }
@@ -161,6 +172,7 @@ const initialState: ContentState = {
     free: false,
     viewOnly: false,
   },
+  sortOption: SortOption.ITEM_NAME,
   hasFetched: false, // Track if data has been fetched
 };
 
@@ -189,6 +201,12 @@ const contentSlice = createSlice({
      */
     setFilteredItems: (state, action: PayloadAction<Item[]>) => {
       state.filteredItems = action.payload;
+    },
+    /**
+     * Updates the sort option.
+     */
+    setSortOption: (state, action: PayloadAction<SortOption>) => {
+      state.sortOption = action.payload;
     },
     /**
      * Resets search term and filters to default values.
@@ -250,6 +268,7 @@ export const {
   setSearchTerm,
   setFilters,
   setFilteredItems,
+  setSortOption,
   clearFilters,
   resetError,
   retryFetch,

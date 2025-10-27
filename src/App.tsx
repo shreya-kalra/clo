@@ -4,6 +4,7 @@ import ContentsList from './components/ContentsList/ContentsList';
 import FilterSection from './components/FilterSection/FilterSection';
 import Header from './components/Header/Header';
 import SearchBar from './components/SearchBar/SearchBar';
+import SortSection from './components/SortSection/SortSection';
 import { useContent } from './hooks/useContent';
 
 import './App-styles.scss';
@@ -17,9 +18,11 @@ const App: React.FC = () => {
     error,
     searchTerm,
     filters,
+    sortOption,
     handleSearch,
     handleFilterChange,
     handleReset,
+    handleSortChange,
     handleItemClick,
     handleRetry,
   } = useContent();
@@ -34,6 +37,7 @@ const App: React.FC = () => {
           onReset={handleReset}
           initialFilters={filters}
         />
+        <SortSection onSortChange={handleSortChange} initialSort={sortOption} />
         <ContentsList
           items={filteredItems}
           onItemClick={handleItemClick}

@@ -34,10 +34,6 @@ button {
   min-width: $touch-target;
   outline: none;
 
-  &:focus-visible {
-    @include focus-visible;
-  }
-
   &:active {
     transform: scale(0.98);
   }
@@ -50,10 +46,6 @@ input {
   font-size: $text-base;
   min-height: $touch-target;
   outline: none;
-
-  &:focus {
-    @include focus-visible;
-  }
 }
 
 // Touch device optimizations

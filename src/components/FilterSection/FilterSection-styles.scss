@@ -5,9 +5,10 @@
 // Filter section component styles
 .filter-section {
   background-color: $background-secondary;
+  border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
-  margin: $space-1-5 0;
+  margin-bottom: $space-1;
   padding: $space-1-5;
   width: 100%;
 
@@ -19,7 +20,7 @@
   &__label {
     color: $white-color;
     display: block;
-    font-size: $text-xl;
+    font-size: $text-base;
     font-weight: 600;
   }
 
@@ -36,11 +37,7 @@
     display: flex;
     gap: $space-0-5;
     @include smooth-transition(background-color);
-    min-height: $touch-target;
-
-    &:hover {
-      @include button-hover;
-    }
+    min-height: $text-xl;
 
     input[type='checkbox'] {
       accent-color: $primary-color;
@@ -68,21 +65,16 @@
     min-height: $touch-target;
     padding: $spacing-0-125;
     @include smooth-transition();
-
-    &:hover {
-      color: $primary-hover;
-    }
   }
 
   // Responsive styles
   @include media($mobile-lg) {
-    margin: $space-1 0;
     padding: $space-1;
     gap: $space-1;
 
-    .filter-section__checkbox {
-      min-height: 2.5rem;
-    }
+    // .filter-section__checkbox {
+    //   min-height: auto;
+    // }
 
     .filter-section__reset {
       font-size: $text-xs;
@@ -92,11 +84,10 @@
   }
 
   @include media($tablet) {
-    margin: $space-1-25 0;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem;
+    padding: 1rem;
 
     .filter-section__options {
       flex-direction: row;
@@ -112,6 +103,7 @@
 
     .filter-section__checkbox {
       min-height: auto;
+      min-height: $text-xl;
     }
 
     .filter-section__reset {
@@ -125,6 +117,7 @@
   @include media($desktop) {
     .filter-section__checkboxes {
       width: 40%;
+      height: $text-xl;
     }
   }
 }

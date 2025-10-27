@@ -2,6 +2,7 @@ import contentReducer, {
   ContentState,
   Item,
   PricingStatus,
+  SortOption,
   clearFilters,
   fetchContent,
   resetError,
@@ -9,6 +10,7 @@ import contentReducer, {
   setFilteredItems,
   setFilters,
   setSearchTerm,
+  setSortOption,
 } from './contentSlice';
 
 describe('contentSlice', () => {
@@ -19,6 +21,7 @@ describe('contentSlice', () => {
     error: null,
     searchTerm: '',
     filters: { paid: false, free: false, viewOnly: false },
+    sortOption: SortOption.ITEM_NAME,
     hasFetched: false,
   };
 
@@ -100,6 +103,25 @@ describe('contentSlice', () => {
         free: false,
         viewOnly: false,
       });
+    });
+  });
+
+  describe('setSortOption', () => {
+    test('should update sort option', () => {
+      const action = setSortOption(SortOption.HIGHER_PRICE);
+      const state = contentReducer(initialState, action);
+
+      expect(state.sortOption).toBe(SortOption.HIGHER_PRICE);
+    });
+
+    test('should handle all sort options', () => {
+      const action1 = setSortOption(SortOption.LOWER_PRICE);
+      const state1 = contentReducer(initialState, action1);
+      expect(state1.sortOption).toBe(SortOption.LOWER_PRICE);
+
+      const action2 = setSortOption(SortOption.ITEM_NAME);
+      const state2 = contentReducer(state1, action2);
+      expect(state2.sortOption).toBe(SortOption.ITEM_NAME);
     });
   });
 

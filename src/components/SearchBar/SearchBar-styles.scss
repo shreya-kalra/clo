@@ -63,13 +63,6 @@
     min-height: $touch-target;
     box-shadow: $shadow-md;
 
-    &:focus {
-      box-shadow:
-        0 0 0 $border-md $primary-color,
-        $shadow-md;
-      background-color: $border-color;
-    }
-
     &::placeholder {
       color: $text-muted;
       font-size: $text-sm;
@@ -139,8 +132,6 @@
 // Responsive styles
 @include media($mobile-lg) {
   .search-bar {
-    margin-bottom: $space-1-25;
-
     &__input {
       padding: $space-1;
       font-size: $text-sm;
@@ -166,14 +157,12 @@
 
 @include media($tablet) {
   .search-bar {
-    margin-bottom: $space-1-5;
-
     &__form {
       margin: 0 auto;
     }
 
     &__input {
-      padding: $space-1-5;
+      padding: $space-1 $space-1-5;
       font-size: $text-lg;
     }
 

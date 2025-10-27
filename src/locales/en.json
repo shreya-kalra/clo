@@ -15,6 +15,12 @@
     "title": "Pricing Option",
     "reset": "Reset"
   },
+  "sort": {
+    "title": "Sort By",
+    "item-name": "Item Name",
+    "higher-price": "Higher Price",
+    "lower-price": "Lower Price"
+  },
   "content": {
     "loading": "Loading items...",
     "empty": "No content found"
