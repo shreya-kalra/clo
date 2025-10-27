@@ -1,7 +1,7 @@
 // Mixins
 @use 'variables' as *;
 
-@mixin mobile-first($breakpoint) {
+@mixin media($breakpoint) {
   @media (min-width: $breakpoint) {
     @content;
   }
@@ -15,7 +15,7 @@
 
 @mixin focus-visible {
   outline: $border-md solid $primary-color;
-  outline-offset: $space-1;
+  outline-offset: $spacing-0-125;
   border-radius: $radius-sm;
 }
 

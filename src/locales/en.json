@@ -4,8 +4,9 @@
   },
   "common": {
     "free": "FREE",
-    "view-only": "View Only",
-    "paid": "Paid"
+    "paid": "Paid",
+    "retry": "Retry",
+    "view-only": "View Only"
   },
   "search": {
     "placeholder": "Find the items you're looking for"

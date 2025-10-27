@@ -29,12 +29,12 @@
   text-rendering: optimizeLegibility;
 
   // CSS Custom Properties for runtime flexibility
-  --space-xs: #{$space-xs};
-  --space-sm: #{$space-sm};
-  --space-md: #{$space-md};
-  --space-lg: #{$space-lg};
-  --space-xl: #{$space-xl};
-  --space-2xl: #{$space-2xl};
+  --space-xs: #{$spacing-0-25};
+  --space-sm: #{$space-0-5};
+  --space-md: #{$space-1};
+  --space-lg: #{$space-1-5};
+  --space-xl: #{$space-2};
+  --space-2xl: #{$space-3};
 
   --text-xs: #{$text-xs};
   --text-sm: #{$text-sm};
@@ -60,7 +60,7 @@
 
 body {
   background-color: $background-dark;
-  color: white;
+  color: $white-color;
   margin: 0;
   min-height: 100vh;
   min-width: $mobile;
@@ -102,7 +102,7 @@ h6 {
 }
 
 // Tablet and up heading sizes
-@include mobile-first($tablet) {
+@include media($tablet) {
   h1 {
     font-size: $text-3xl;
   }
@@ -132,10 +132,10 @@ a {
 
 // Scrollbar styling
 ::-webkit-scrollbar {
-  width: $space-3;
+  width: $space-0-375;
 
-  @include mobile-first($tablet) {
-    width: $space-4;
+  @include media($tablet) {
+    width: $space-0-5;
   }
 }
 
@@ -145,14 +145,14 @@ a {
 
 ::-webkit-scrollbar-thumb {
   background: $primary-color;
-  border-radius: $space-3;
+  border-radius: $space-0-375;
   @include smooth-transition(background);
 
   &:hover {
     background: $primary-hover;
   }
 
-  @include mobile-first($tablet) {
+  @include media($tablet) {
     border-radius: $radius-sm;
   }
 }
@@ -163,7 +163,7 @@ a {
 }
 
 // Mobile-specific improvements
-@include mobile-first($tablet) {
+@include media($tablet) {
   // Prevent zoom on input focus on iOS
   input[type='text'],
   input[type='email'],
