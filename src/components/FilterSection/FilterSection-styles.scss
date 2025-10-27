@@ -1,0 +1,130 @@
+// Import variables and mixins
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// Filter section component styles
+.filter-section {
+  background-color: $background-secondary;
+  display: flex;
+  flex-direction: column;
+  margin: $space-1-5 0;
+  padding: $space-1-5;
+  width: 100%;
+
+  &__options {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    color: $white-color;
+    display: block;
+    font-size: $text-xl;
+    font-weight: 600;
+  }
+
+  &__checkboxes {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  &__checkbox {
+    align-items: center;
+    color: $white-color;
+    cursor: pointer;
+    display: flex;
+    gap: $space-0-5;
+    @include smooth-transition(background-color);
+    min-height: $touch-target;
+
+    &:hover {
+      @include button-hover;
+    }
+
+    input[type='checkbox'] {
+      accent-color: $primary-color;
+      cursor: pointer;
+      flex-shrink: 0;
+      height: $icon-md;
+      width: $icon-md;
+    }
+
+    &-text {
+      font-size: $text-sm;
+      font-weight: 500;
+      user-select: none;
+    }
+  }
+
+  &__reset {
+    align-self: center;
+    background-color: transparent;
+    color: $primary-color;
+    cursor: pointer;
+    font-size: $text-sm;
+    font-weight: 600;
+    margin-top: $space-0-5;
+    min-height: $touch-target;
+    padding: $spacing-0-125;
+    @include smooth-transition();
+
+    &:hover {
+      color: $primary-hover;
+    }
+  }
+
+  // Responsive styles
+  @include media($mobile-lg) {
+    margin: $space-1 0;
+    padding: $space-1;
+    gap: $space-1;
+
+    .filter-section__checkbox {
+      min-height: 2.5rem;
+    }
+
+    .filter-section__reset {
+      font-size: $text-xs;
+      padding: $space-0-5;
+      min-height: 2.5rem;
+    }
+  }
+
+  @include media($tablet) {
+    margin: $space-1-25 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem;
+
+    .filter-section__options {
+      flex-direction: row;
+      align-items: center;
+      gap: $space-1;
+      flex: 1;
+    }
+
+    .filter-section__checkboxes {
+      grid-template-columns: repeat(3, 1fr);
+      width: 50%;
+    }
+
+    .filter-section__checkbox {
+      min-height: auto;
+    }
+
+    .filter-section__reset {
+      width: auto;
+      margin-top: 0;
+      padding: $space-0-5 $space-1;
+      min-height: auto;
+    }
+  }
+
+  @include media($desktop) {
+    .filter-section__checkboxes {
+      width: 40%;
+    }
+  }
+}
