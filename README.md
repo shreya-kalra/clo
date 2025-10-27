@@ -1,5 +1,7 @@
 # Content List Application
 
+![Preview](public/preview.png)
+
 A modern React application for browsing and filtering content items with search functionality. Built with React, TypeScript, Redux Toolkit, and Vite.
 
 ## 📋 Table of Contents
