@@ -1,0 +1,231 @@
+// Import variables and mixins
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// Contents list component styles
+.contents-list {
+  width: 100%;
+
+  &__title {
+    color: $primary-color;
+    display: inline-block;
+    font-size: $text-xl;
+    font-weight: 700;
+    margin: 0 0 $space-1-5 0;
+    padding-bottom: $space-0-5;
+    text-align: center;
+    width: 100%;
+  }
+
+  &__grid {
+    display: grid;
+    gap: $space-1;
+    grid-template-columns: 1fr;
+    margin-top: $space-1;
+  }
+
+  &__empty {
+    color: $text-secondary;
+    font-size: $text-lg;
+    line-height: 1.6;
+    padding: $space-3;
+    text-align: center;
+  }
+
+  &__error {
+    align-items: center;
+    background-color: $error-background;
+    border-radius: $radius-lg;
+    border: $border-md solid $error-color;
+    color: $error-color;
+    display: flex;
+    flex-direction: column;
+    font-size: $text-lg;
+    gap: $space-1-5;
+    line-height: 1.6;
+    margin: $space-1 0;
+    padding: $space-3;
+    text-align: center;
+  }
+
+  &__retry-button {
+    @include smooth-transition();
+    background-color: $error-color;
+    border-radius: $radius-md;
+    border: none;
+    color: $text-primary;
+    cursor: pointer;
+    font-size: $text-base;
+    font-weight: 600;
+    min-height: $touch-target;
+    padding: $space-1 $space-1-5;
+
+    &:hover {
+      background-color: $error-hover;
+      transform: translateY(-$spacing-0-125);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  &__skeleton {
+    display: grid;
+    gap: $space-1;
+    grid-template-columns: 1fr;
+    margin-top: $space-1-5;
+
+    &-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 17.5rem; // 280px
+      overflow: hidden;
+    }
+
+    &-image {
+      animation: skeleton-loading 1.5s infinite;
+      background: linear-gradient(
+        90deg,
+        $border-color 25%,
+        $skeleton-gradient-color 50%,
+        $border-color 75%
+      );
+      background-size: 200% 100%;
+      border-radius: $radius-md;
+      min-height: 17.5rem; // 280px
+      width: 100%;
+    }
+
+    &-content {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: $space-0-5;
+      padding-top: $space-1;
+    }
+
+    &-title {
+      animation: skeleton-loading 1.5s infinite;
+      background: linear-gradient(
+        90deg,
+        $border-color 25%,
+        $skeleton-gradient-color 50%,
+        $border-color 75%
+      );
+      background-size: 200% 100%;
+      border-radius: $radius-sm;
+      height: $space-1-25;
+      width: 80%;
+    }
+
+    &-creator {
+      animation: skeleton-loading 1.5s infinite;
+      background: linear-gradient(
+        90deg,
+        $border-color 25%,
+        $skeleton-gradient-color 50%,
+        $border-color 75%
+      );
+      background-size: 200% 100%;
+      border-radius: $radius-sm;
+      height: $space-1;
+      width: 60%;
+    }
+  }
+}
+
+// Keyframes
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+// Responsive styles
+@include media($mobile-lg) {
+  .contents-list {
+    &__skeleton {
+      grid-template-columns: repeat(2, 1fr);
+      gap: $space-1-5;
+      &-image {
+        min-height: 15rem; // 240px
+      }
+    }
+
+    &__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: $space-1-5;
+    }
+
+    &__title {
+      font-size: $text-2xl;
+      text-align: left;
+    }
+  }
+}
+
+@include media($tablet) {
+  .contents-list {
+    &__skeleton {
+      grid-template-columns: repeat(3, 1fr);
+      gap: $space-2;
+      &-image {
+        min-height: 20rem; // 320px
+      }
+    }
+
+    &__grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: $space-2;
+    }
+
+    &__title {
+      font-size: $text-2xl;
+      margin-bottom: $space-2;
+    }
+
+    &__empty,
+    &__error {
+      padding: $space-3 $space-2;
+    }
+  }
+}
+
+@include media($desktop) {
+  .contents-list {
+    &__skeleton {
+      grid-template-columns: repeat(3, 1fr);
+      &-image {
+        min-height: 22.5rem; // 360px
+      }
+    }
+  }
+}
+
+@include media($desktop-lg) {
+  .contents-list {
+    &__skeleton {
+      grid-template-columns: repeat(4, 1fr);
+      &-image {
+        min-height: 22.5rem; // 360px
+      }
+    }
+
+    &__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}

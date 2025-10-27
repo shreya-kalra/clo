@@ -1,0 +1,183 @@
+// Import variables and mixins
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+// Root styles
+:root {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  background-color: $background-dark;
+  color-scheme: dark;
+  color: $text-primary;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Roboto',
+    'Oxygen',
+    'Ubuntu',
+    'Cantarell',
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
+  font-synthesis: none;
+  font-weight: 400;
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+
+  // CSS Custom Properties for runtime flexibility
+  --space-xs: #{$spacing-0-25};
+  --space-sm: #{$space-0-5};
+  --space-md: #{$space-1};
+  --space-lg: #{$space-1-5};
+  --space-xl: #{$space-2};
+  --space-2xl: #{$space-3};
+
+  --text-xs: #{$text-xs};
+  --text-sm: #{$text-sm};
+  --text-base: #{$text-base};
+  --text-lg: #{$text-lg};
+  --text-xl: #{$text-xl};
+  --text-2xl: #{$text-2xl};
+  --text-3xl: #{$text-3xl};
+
+  --touch-target: #{$touch-target};
+
+  --mobile: #{$mobile};
+  --mobile-lg: #{$mobile-lg};
+  --tablet: #{$tablet};
+  --desktop: #{$desktop};
+  --desktop-lg: #{$desktop-lg};
+}
+
+// Reset and base styles
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $background-dark;
+  color: $white-color;
+  margin: 0;
+  min-height: 100vh;
+  min-width: $mobile;
+  font-size: $text-base;
+  line-height: 1.6;
+  overflow-x: hidden; // Prevent horizontal scroll on mobile
+}
+
+// Typography
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2;
+  margin: 0;
+  font-weight: 600;
+}
+
+// Mobile-first heading sizes
+h1 {
+  font-size: $text-2xl;
+}
+h2 {
+  font-size: $text-xl;
+}
+h3 {
+  font-size: $text-lg;
+}
+h4 {
+  font-size: $text-base;
+}
+h5 {
+  font-size: $text-sm;
+}
+h6 {
+  font-size: $text-xs;
+}
+
+// Tablet and up heading sizes
+@include media($tablet) {
+  h1 {
+    font-size: $text-3xl;
+  }
+  h2 {
+    font-size: $text-2xl;
+  }
+  h3 {
+    font-size: $text-xl;
+  }
+}
+
+p {
+  line-height: 1.6;
+  margin: 0;
+}
+
+// Links
+a {
+  color: $primary-color;
+  text-decoration: none;
+  @include smooth-transition(color);
+
+  &:hover {
+    color: $primary-hover;
+  }
+}
+
+// Scrollbar styling
+::-webkit-scrollbar {
+  width: $space-0-375;
+
+  @include media($tablet) {
+    width: $space-0-5;
+  }
+}
+
+::-webkit-scrollbar-track {
+  background: $background-secondary;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $primary-color;
+  border-radius: $space-0-375;
+  @include smooth-transition(background);
+
+  &:hover {
+    background: $primary-hover;
+  }
+
+  @include media($tablet) {
+    border-radius: $radius-sm;
+  }
+}
+
+// Mobile-specific improvements
+@include media($tablet) {
+  // Prevent zoom on input focus on iOS
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  input[type='search'],
+  textarea,
+  select {
+    font-size: $text-base;
+  }
+}
+
+// Smooth scrolling
+html {
+  scroll-behavior: smooth;
+}
+
+// Mobile-first viewport support
+@supports (height: 100dvh) {
+  .app {
+    min-height: 100dvh;
+  }
+}

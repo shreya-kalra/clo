@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Run lint-staged for staged files
+# This will automatically lint and format only the files you're committing
+npx lint-staged
+
+# Uncomment the line below to run tests on every commit
+# Note: This may slow down commits. Consider running tests in CI/CD instead.
+# npm test

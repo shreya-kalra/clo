@@ -1,0 +1,54 @@
+// Import variables and mixins
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// Sort section component styles
+.sort-section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: $space-1;
+  width: 100%;
+  justify-content: end;
+
+  &__label {
+    color: $white-color;
+    display: block;
+    font-size: $text-xl;
+    font-weight: 600;
+    margin-bottom: $space-1;
+  }
+
+  &__select {
+    background-color: $background-dark;
+    border: none;
+    border-bottom: 1px solid $white-color;
+    color: $white-color;
+    cursor: pointer;
+    font-size: $text-base;
+    font-weight: 500;
+    min-height: $touch-target;
+    outline: none;
+    padding: $space-0-5;
+    @include smooth-transition();
+
+    option {
+      background-color: $background-secondary;
+      color: $white-color;
+    }
+  }
+
+  @include media($tablet) {
+    flex-direction: row;
+    align-items: center;
+
+    .sort-section__label {
+      margin-bottom: 0;
+      margin-right: $space-1;
+    }
+
+    .sort-section__select {
+      width: auto;
+      min-width: 100px;
+    }
+  }
+}

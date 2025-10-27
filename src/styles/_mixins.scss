@@ -1,0 +1,28 @@
+// Mixins
+@use 'variables' as *;
+
+@mixin media($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin touch-device {
+  @media (hover: none) and (pointer: coarse) {
+    @content;
+  }
+}
+
+@mixin focus-visible {
+  outline: $border-md solid $primary-color;
+  outline-offset: $spacing-0-125;
+  border-radius: $radius-sm;
+}
+
+@mixin button-hover {
+  background-color: rgba($primary-color, 0.1);
+}
+
+@mixin smooth-transition($property: all, $duration: 0.2s) {
+  transition: $property $duration ease;
+}

@@ -1,0 +1,28 @@
+{
+  "app": {
+    "title": "CONNECT"
+  },
+  "common": {
+    "free": "FREE",
+    "paid": "Paid",
+    "retry": "Retry",
+    "view-only": "View Only"
+  },
+  "search": {
+    "placeholder": "Find the items you're looking for"
+  },
+  "filters": {
+    "title": "Pricing Option",
+    "reset": "Reset"
+  },
+  "sort": {
+    "title": "Sort By",
+    "item-name": "Item Name",
+    "higher-price": "Higher Price",
+    "lower-price": "Lower Price"
+  },
+  "content": {
+    "loading": "Loading items...",
+    "empty": "No content found"
+  }
+}

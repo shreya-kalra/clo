@@ -1,0 +1,62 @@
+// Import variables and mixins
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+// App component styles
+.app {
+  background-color: $background-dark;
+  color: $white-color;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  &__main {
+    flex: 1;
+    margin: 0 auto;
+    padding: 0 $space-1;
+    width: 100%;
+
+    @include media($tablet) {
+      padding: 0 $space-1-5;
+    }
+  }
+}
+
+// Global button styles - Mobile-first
+button {
+  @include smooth-transition();
+  border-radius: $radius-md;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: $text-base;
+  min-height: $touch-target;
+  min-width: $touch-target;
+  outline: none;
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Global input styles - Mobile-first
+input {
+  border-radius: $radius-md;
+  font-family: inherit;
+  font-size: $text-base;
+  min-height: $touch-target;
+  outline: none;
+}
+
+// Touch device optimizations
+@include touch-device {
+  button {
+    &:hover {
+      transform: none;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
